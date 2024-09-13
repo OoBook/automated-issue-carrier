@@ -174,7 +174,7 @@ steps:
 ```
 
 For example workflow runs, check out the
-[Actions tab](https://github.com/actions/javascript-action/actions)! :rocket:
+[Actions tab](https://github.com/oobook/automated/actions)! :rocket:
 
 ## Usage
 
