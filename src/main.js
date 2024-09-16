@@ -1,35 +1,62 @@
-const core = require('@actions/core')
-const { wait } = require('./wait')
+const Core = require('@actions/core')
+const Github = require('@actions/github')
 
-console.log('Action starting')
 /**
  * The main function for the action.
  * @returns {Promise<void>} Resolves when the action is complete.
  */
 async function run() {
   try {
-    const isTest = core.getInput('test', { required: true })
+    const isTest = isTestStatus() // test input on the action.yml
 
-    await example()
+    // some needs
+    // const Context = getGhContext()
+    // const Payload = getGhPayload()
+    // const Token = getGhToken()
+    // const Octokit = getOctokit()
+
+    if (isTest) {
+      //code for testing locally or on prod
+      Core.info('on testing')
+
+      return
+    }
+
+    Core.info('on production')
+
+    // Put an output variable
+    // Core.setOutput('response', 'some result')
   } catch (error) {
     // Fail the workflow run if an error occurs
-    core.setFailed(error.message)
+    Core.setFailed(error.message)
   }
 }
 
-async function example() {
-  const ms = 100
+function isTestStatus() {
+  return Core.getInput('test', { required: false }) === 'true'
+}
 
-  // Debug logs are only output if the `ACTIONS_STEP_DEBUG` secret is true
-  core.debug(`Waiting ${ms} milliseconds ...`)
+function getRepoOwner() {
+  return Github.context.repo.owner
+}
 
-  // Log the current timestamp, wait, then log the new timestamp
-  core.debug(new Date().toTimeString())
-  await wait(parseInt(ms, 10))
-  core.debug(new Date().toTimeString())
-
-  // Set outputs for other workflow steps to use
-  core.setOutput('time', new Date().toTimeString())
+function getRepoName() {
+  return Github.context.repo.repo
+}
+function getGhContext() {
+  return Github.context
+}
+function getGhPayload() {
+  return Github.context.payload
+}
+function getCommitSha() {
+  return Github.context.sha
+}
+function getGhToken() {
+  return Core.getInput('gh_token')
+}
+function getOctokit() {
+  return Github.getOctokit(getGhToken())
 }
 
 module.exports = {

@@ -1,5 +1,5 @@
 name: Automated
-description: Automated handle
+description: Automated Description
 author: oobook
 branding:
   icon: target
@@ -12,6 +12,9 @@ inputs:
   # gh-token:
   #   description: GitHub token with repo access
   #   required: true
+outputs:
+  # response:
+  #   description: 'The one of the results'
 runs:
   using: node20
   main: dist/index.js
