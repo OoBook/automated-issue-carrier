@@ -11,7 +11,7 @@ on:
         type: choice
         description: The major version to update
         options:
-          - v2
+          # - v2
           - v1
 
   
@@ -27,6 +27,7 @@ jobs:
     - uses: actions/checkout@v4.1.6
       with:
         fetch-depth: 0
+        token: ${{ secrets.WORKFLOW_TOKEN }}
     - name: Git config
       run: |
         git config user.name "github-actions[bot]"
