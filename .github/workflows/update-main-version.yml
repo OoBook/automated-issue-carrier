@@ -31,9 +31,13 @@ jobs:
         # token: ${{ secrets.GITHUB_TOKEN }}
     - name: Git config
       run: |
-        git config user.name "${{ github.repository_owner }}"
+        git config user.name "github-actions[bot]"
         git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-        git config --list
-        git tag -f ${{ github.event.inputs.major_version }} ${{ github.event.inputs.target }}
-        git push origin ${{ github.event.inputs.major_version }} --force
+    - name: Tag new target
+      run: git tag -f ${{ github.event.inputs.major_version }} ${{ github.event.inputs.target }}
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        branch: ${{ github.event.inputs.major_version }}
+        force: true
+
