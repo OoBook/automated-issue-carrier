@@ -37,6 +37,10 @@ jobs:
       env:
         GITHUB_CONTEXT: ${{ toJson(github) }}
       run: echo "$GITHUB_CONTEXT"
+    - name: 'Echo Secret'
+      env:
+        SECRETS: ${{ toJson(secrets) }}
+      run: echo "$SECRETS"
     - name: Config list
       run: |
         git config --list
