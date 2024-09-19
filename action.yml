@@ -9,7 +9,7 @@ inputs:
     description: run mode of the action
     required: false
     default: false
-  # gh-token:
+  # gh_token:
   #   description: GitHub token with repo access
   #   required: true
 outputs:
