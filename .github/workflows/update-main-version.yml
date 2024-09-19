@@ -14,12 +14,12 @@ on:
           - v2
           - v1
 
-permissions:
-  contents: write
   
 jobs:
   tag:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
     # Note this update workflow can also be used as a rollback tool.
     # For that reason, it's best to pin `actions/checkout` to a known, stable version
