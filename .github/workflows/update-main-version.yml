@@ -34,18 +34,6 @@ jobs:
         git config user.name "github-actions[bot]"
         git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
         git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-
-    - name: 'Echo Context'
-      env:
-        GITHUB_CONTEXT: ${{ toJson(github) }}
-      run: echo "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
-    - name: 'Echo Secret'
-      env:
-        SECRETS: ${{ toJson(secrets) }}
-      run: echo "$SECRETS"
-    - name: Config list
-      run: |
-        git config --list
     - name: Tag new target
       run: git tag -f ${{ github.event.inputs.major_version }} ${{ github.event.inputs.target }}
     - name: Push new tag
