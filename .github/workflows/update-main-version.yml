@@ -33,6 +33,9 @@ jobs:
     #  run: |
     #    git config user.name "github-actions[bot]"
     #    git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+    - uses: qoomon/actions--setup-git@v1
+      with:
+        user: bot
     - name: Tag new target
       run: git tag -f ${{ github.event.inputs.major_version }} ${{ github.event.inputs.target }}
     - name: Push new tag
