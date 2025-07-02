@@ -23,8 +23,12 @@ on:
         description: "The path to check for changes"
         default: "dist"
     outputs:
-      has_incompatible_changes: ${{ steps.diff.outputs.has_incompatible_changes }}
-      can_publish: ${{ steps.diff.outputs.can_publish }}
+      has_incompatible_changes: 
+        description: "Indicates if there are incompatible changes"
+        value: ${{ jobs.check-dist.outputs.has_incompatible_changes }}
+      can_publish: 
+        description: "Indicates if the changes can be published"
+        value: ${{ jobs.check-dist.outputs.can_publish }}
 
 permissions:
   contents: read
