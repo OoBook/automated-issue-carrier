@@ -16,11 +16,11 @@ permissions:
   
 jobs:
   check-dist:
+    name: Check dist for incompatible changes
     uses: ./.github/workflows/check-dist.yml
-
-  test:
+  tag-and-release:
     runs-on: ubuntu-latest
-    name: Test
+    name: Tag and Release
     needs: check-dist
     if: ${{ needs.check-dist.outputs.can_publish == 'true' }}
     steps:
