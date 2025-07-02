@@ -250,7 +250,7 @@ async function addIssueToProjects(issue, isTest) {
         }else if(fieldObject.dataType === 'SINGLE_SELECT') {
           found = fieldObject.options.some(option => option.name === itemFieldsObject[key])
           if(found) {
-            // console.log(fieldObject.options.find(option => option.name === itemsFieldsObject[key]))
+            console.log(fieldObject.options.find(option => option.name === itemsFieldsObject[key]))
             // itemsFieldsObject[key] = fieldObject.options.find(option => option.name === itemsFieldsObject[key]).id
           }else {
             found = false
