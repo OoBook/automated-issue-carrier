@@ -1,15 +1,41 @@
 name: Main
-on: [push]
 
+on:
+  push:
+    branches:
+      - main
+    tags-ignore:
+      - v*
+    paths-ignore:
+      - '**.md'
+      - '**.yml'
+      - '**.yaml'
+    
+permissions:
+  contents: write
+  
 jobs:
+  check-dist:
+    uses: ./.github/workflows/check-dist.yml
+
   test:
     runs-on: ubuntu-latest
     name: Test
+    needs: check-dist
+    if: ${{ needs.check-dist.outputs.can_publish == 'true' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - uses: ./
+      - name: Create Tag
+        uses: oobook/automated-tag@v1
+        id: tag-generation
         with:
-          test: true
-          # gh-token: ''
+          gh_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create Release
+        uses: oobook/automated-release@v1
+        id: release-generation
+        with:
+          gh_token: ${{ secrets.GITHUB_TOKEN }}
+          tag: "${{ steps.tag-generation.outputs.tag }}"
+          prerelease: true
 
