@@ -32,18 +32,18 @@ jobs:
       #   run: |
       #     echo "can_publish=${{ needs.check-dist.outputs.can_publish }}" >> $GITHUB_OUTPUT
       #     echo "has_incompatible_changes=${{ needs.check-dist.outputs.has_incompatible_changes }}" >> $GITHUB_OUTPUT
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Create Tag
-        uses: oobook/automated-tag@v1
-        id: tag-generation
-        with:
-          gh_token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Create Release
-        uses: oobook/automated-release@v1
-        id: release-generation
-        with:
-          gh_token: ${{ secrets.GITHUB_TOKEN }}
-          tag: "${{ steps.tag-generation.outputs.tag }}"
-          prerelease: true
+      # - name: Checkout
+      #   uses: actions/checkout@v4
+      # - name: Create Tag
+      #   uses: oobook/automated-tag@v1
+      #   id: tag-generation
+      #   with:
+      #     gh_token: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Create Release
+      #   uses: oobook/automated-release@v1
+      #   id: release-generation
+      #   with:
+      #     gh_token: ${{ secrets.GITHUB_TOKEN }}
+      #     tag: "${{ steps.tag-generation.outputs.tag }}"
+      #     prerelease: true
 
