@@ -9,12 +9,30 @@ inputs:
     description: run mode of the action
     required: false
     default: false
-  # gh_token:
-  #   description: GitHub token with repo access
-  #   required: true
+  gh_token:
+    description: GitHub token with repo access
+    required: true
+  labels:
+    description: Labels to handle
+    required: false
+    default: "bug,accepted enhancement,accepted perf,accepted"
+  projects:
+    description: Project to handle
+    required: false
+    default: "*"
+  item_fields:
+    description: Item fields to handle
+    required: false
+    default: ""
+  force_update:
+    description: Force update the item fields
+    required: false
+    default: false
 outputs:
   response:
-    description: 'The one of the results'
+    description: 'The response'
+  project_item_ids:
+    description: 'The project item ids'
 runs:
   using: node20
   main: dist/index.js

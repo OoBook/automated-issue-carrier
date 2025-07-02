@@ -1,12 +1,12 @@
 {
-  "name": "automated",
+  "name": "automated-issue-carrier",
   "version": "1.0.0",
-  "description": "",
-  "homepage": "https://github.com/oobook/automated#readme",
+  "description": "This action creates or updates a project item for an issue in a project.",
+  "homepage": "https://github.com/oobook/automated-issue-carrier#readme",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/oobook/automated.git"
+    "url": "git+https://github.com/oobook/automated-issue-carrier.git"
   },
   "scripts": {
     "local": "npx @github/local-action run ./ src/index.js .env",
@@ -25,8 +25,14 @@
   "keywords": [
     "Github",
     "Actions",
-    "Automated"
-
+    "Automated",
+    "Issue",
+    "Project",
+    "Move",
+    "Create",
+    "ProjectItem",
+    "Carry",
+    "Carrier"
   ],
   "author": "Oğuzhan Bükçüoğlu",
   "license": "ISC",
