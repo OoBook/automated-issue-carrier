@@ -22,6 +22,9 @@ on:
         type: string
         description: "The path to check for changes"
         default: "dist"
+    outputs:
+      has_incompatible_changes: ${{ steps.diff.outputs.has_incompatible_changes }}
+      can_publish: ${{ steps.diff.outputs.can_publish }}
 
 permissions:
   contents: read
