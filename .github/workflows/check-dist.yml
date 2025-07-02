@@ -25,6 +25,10 @@ jobs:
     name: Check dist/
     runs-on: ubuntu-latest
 
+    outputs:
+      has_incompatible_changes: ${{ steps.diff.outputs.has_incompatible_changes }}
+      can_publish: ${{ steps.diff.outputs.can_publish }}
+
     steps:
       - name: Checkout
         id: checkout
@@ -51,15 +55,21 @@ jobs:
         id: diff
         run: |
           if [ ! -d dist/ ]; then
+            echo "has_incompatible_changes=true" >> $GITHUB_OUTPUT
+            echo "can_publish=false" >> $GITHUB_OUTPUT
             echo "Expected dist/ directory does not exist.  See status below:"
             ls -la ./
             exit 1
           fi
           if [ "$(git diff --ignore-space-at-eol --text dist/ | wc -l)" -gt "0" ]; then
+            echo "has_incompatible_changes=true" >> $GITHUB_OUTPUT
+            echo "can_publish=false" >> $GITHUB_OUTPUT
             echo "Detected uncommitted changes after build. See status below:"
             git diff --ignore-space-at-eol --text dist/
             exit 1
           fi
+          echo "has_incompatible_changes=false" >> $GITHUB_OUTPUT
+          echo "can_publish=true" >> $GITHUB_OUTPUT
 
       # If `dist/` was different than expected, upload the expected version as a
       # workflow artifact.
