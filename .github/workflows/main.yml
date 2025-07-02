@@ -18,6 +18,9 @@ jobs:
   check-dist:
     name: Check dist for incompatible changes
     uses: ./.github/workflows/check-dist.yml
+    with:
+      dist_path: "dist"
+
   tag-and-release:
     runs-on: ubuntu-latest
     name: Tag and Release
