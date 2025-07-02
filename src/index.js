@@ -3,6 +3,8 @@
  */
 const { run } = require('./main')
 
+run()
+
 module.exports = {
   run
 }
