@@ -27,11 +27,11 @@ jobs:
     needs: check-dist
     if: ${{ needs.check-dist.outputs.can_publish == 'true' }}
     steps:
-      # - name: Check for changes
-      #   id: changes
-      #   run: |
-      #     echo "can_publish=${{ needs.check-dist.outputs.can_publish }}" >> $GITHUB_OUTPUT
-      #     echo "has_incompatible_changes=${{ needs.check-dist.outputs.has_incompatible_changes }}" >> $GITHUB_OUTPUT
+      - name: Check for changes
+        id: changes
+        run: |
+          echo "can_publish=${{ needs.check-dist.outputs.can_publish }}" >> $GITHUB_OUTPUT
+          echo "has_incompatible_changes=${{ needs.check-dist.outputs.has_incompatible_changes }}" >> $GITHUB_OUTPUT
       # - name: Checkout
       #   uses: actions/checkout@v4
       # - name: Create Tag
