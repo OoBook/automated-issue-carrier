@@ -15,7 +15,6 @@ on:
       - main
   push:
     branches:
-      - main
       - dev
   workflow_call:
     inputs:
