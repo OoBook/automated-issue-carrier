@@ -61,7 +61,7 @@ jobs:
       - name: Compare Directories
         id: diff
         run: |
-          $dist_path = '${{ inputs.dist_path || 'dist' }}'
+          dist_path='${{ inputs.dist_path || 'dist' }}'
           if [ ! -d $dist_path/ ]; then
             echo "has_incompatible_changes=true" >> $GITHUB_OUTPUT
             echo "can_publish=false" >> $GITHUB_OUTPUT
