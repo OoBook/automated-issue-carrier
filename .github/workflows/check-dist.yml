@@ -16,6 +16,7 @@ on:
   push:
     branches:
       - main
+      - dev
 
 permissions:
   contents: read
@@ -65,7 +66,7 @@ jobs:
             echo "has_incompatible_changes=true" >> $GITHUB_OUTPUT
             echo "can_publish=false" >> $GITHUB_OUTPUT
             echo "Detected uncommitted changes after build. See status below:"
-            git diff --ignore-space-at-eol --text dist/
+            # git diff --ignore-space-at-eol --text dist/
             exit 1
           fi
           echo "has_incompatible_changes=false" >> $GITHUB_OUTPUT
