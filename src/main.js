@@ -26,7 +26,6 @@ async function run() {
     await handleProductionMode()
 
     // Put an output variable
-    // Core.setOutput('response', 'some result')
   } catch (error) {
     // Fail the workflow run if an error occurs
     Core.setFailed(error.message)
