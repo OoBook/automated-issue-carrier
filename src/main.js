@@ -151,6 +151,8 @@ async function addIssueToProjects(issue, isTest) {
 
   const projectItemIds = []
 
+  console.log(projects)
+
   for await (const project of projects) {
     // get project custom fields with octokit graphql
     // but check whether the itemFieldsKeys is in the project custom fields
