@@ -17,6 +17,12 @@ on:
     branches:
       - main
       - dev
+  workflow_call:
+    inputs:
+      dist_path:
+        type: string
+        description: "The path to check for changes"
+        default: "dist"
 
 permissions:
   contents: read
@@ -46,7 +52,7 @@ jobs:
         id: install
         run: npm ci
 
-      - name: Build dist/ Directory
+      - name: Build dist directory
         id: build
         run: npm run build
 
@@ -55,18 +61,19 @@ jobs:
       - name: Compare Directories
         id: diff
         run: |
-          if [ ! -d dist/ ]; then
+          $dist_path = ${{ inputs.dist_path || 'dist' }}
+          if [ ! -d $dist_path/ ]; then
             echo "has_incompatible_changes=true" >> $GITHUB_OUTPUT
             echo "can_publish=false" >> $GITHUB_OUTPUT
             echo "Expected dist/ directory does not exist.  See status below:"
             ls -la ./
             exit 1
           fi
-          if [ "$(git diff --ignore-space-at-eol --text dist/ | wc -l)" -gt "0" ]; then
+          if [ "$(git diff --ignore-space-at-eol --text $dist_path/ | wc -l)" -gt "0" ]; then
             echo "has_incompatible_changes=true" >> $GITHUB_OUTPUT
             echo "can_publish=false" >> $GITHUB_OUTPUT
             echo "Detected uncommitted changes after build. See status below:"
-            # git diff --ignore-space-at-eol --text dist/
+            # git diff --ignore-space-at-eol --text $dist_path/
             exit 1
           fi
           echo "has_incompatible_changes=false" >> $GITHUB_OUTPUT
@@ -79,5 +86,5 @@ jobs:
         id: upload
         uses: actions/upload-artifact@v4
         with:
-          name: dist
-          path: dist/
+          name: ${{ inputs.dist_path || 'dist' }}
+          path: ${{ inputs.dist_path || 'dist' }}/
