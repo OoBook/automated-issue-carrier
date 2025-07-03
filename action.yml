@@ -2,7 +2,7 @@ name: Automated Issue Carrier
 description: This action will create/update project items for the issue.
 author: oobook
 branding:
-  icon: project-symlink
+  icon: arrow-right-circle
   color: purple
 inputs:
   test:
