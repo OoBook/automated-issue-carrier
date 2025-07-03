@@ -2,6 +2,16 @@
 
 All notable changes to `Automated Issue Carrier` will be documented in this file
 
+## v1.0.2 - 2025-07-03
+
+### :recycle: Refactors
+
+- :sparkles: update handleIssueLabeled and checkIssueConditions functions to include label parameter and improve logic by @OoBook in https://github.com/OoBook/automated-issue-carrier/commit/ce3766572e9d6bd776acd0a066cb795325aebb38
+
+### :beers: Other Stuff
+
+- change branding icon and color by @web-flow in https://github.com/OoBook/automated-issue-carrier/commit/5fe82dcb20c2d061bd39cf518cff7fe4ef8387a1
+
 ## v1.0.1 - 2025-07-03
 
 ### :wrench: Bug Fixes
