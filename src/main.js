@@ -85,7 +85,7 @@ async function processIssueEvent(eventData, isTest = false) {
       projectItemIds = result.projectItemIds
       break
     case 'labeled':
-      result = await handleIssueLabeled(issue, isTest)
+      result = await handleIssueLabeled(issue, eventData.label, isTest)
       projectItemIds = result.projectItemIds
       break
     default:
@@ -119,11 +119,11 @@ async function handleIssueOpened(issue, isTest) {
   }
 }
 
-async function handleIssueLabeled(issue, isTest) {
-  Core.info(`Issue #${issue.number} was labeled with: ${issue.label?.name || 'unknown'}`)
+async function handleIssueLabeled(issue, label, isTest) {
+  Core.info(`Issue #${issue.number} was labeled with: ${label.name || 'unknown'}`)
   
   let projectItemIds = []
-  if(checkIssueConditions(issue)) {    
+  if(checkIssueConditions(issue, label?.name ?? null)) {    
     // Add issue to projects
     const result = await addIssueToProjects(issue, isTest)
     projectItemIds = result.projectItemIds
@@ -544,7 +544,7 @@ function parseLabelsPayload() {
   }
 }
 
-function checkIssueConditions(issue) {
+function checkIssueConditions(issue, labelName) {
   let matched = true
 
   const { hasLabel, labelArray } = parseLabelsPayload()
@@ -557,7 +557,13 @@ function checkIssueConditions(issue) {
         issueLabels.some(issueLabel => issueLabel.name === orLabel)
       );
       if (allLabelsMatch) {
-        matched = true;
+        if(labelName) {
+          if(orLabels.some(orLabel => orLabel === labelName)) {
+            matched = true;
+          }
+        }else{
+          matched = true;
+        }
       }
     });
   }
